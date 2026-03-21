@@ -1,10 +1,11 @@
-import { KeyboardEvent, useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Paper, TextField, Button, Typography, Alert, CircularProgress } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { authActions } from 'src/store/actions/auth.actions';
 import { authSelectors } from 'src/store/selectors/auth.selectors';
 import { lang } from 'src/lang';
+import { LoginHeader, LoginForm, LoginDemoCredentials } from 'src/pages/login-page';
 
 const baseTexts = lang.login;
 
@@ -13,81 +14,37 @@ function LoginPage() {
 	const navigate = useNavigate();
 	const isAuthenticated = useAppSelector(authSelectors.isAuthenticated);
 	const isLoggingIn = useAppSelector(authSelectors.isLoggingIn);
-
-	const [ username, setUsername ] = useState('');
-	const [ password, setPassword ] = useState('');
-	const [ loginError, setLoginError ] = useState<string | null>(null);
-
+	
 	useEffect(() => {
 		if (isAuthenticated) navigate('/items');
 	}, [ isAuthenticated, navigate ]);
-
-	const handleSubmit = async () => {
-		if (!username || !password) {
-			setLoginError(baseTexts.emptyFields);
-			return;
-		}
-		setLoginError(null);
+	
+	const handleLogin = async (username: string, password: string): Promise<string | null> => {
 		try {
 			await dispatch(authActions.login({ username, password })).unwrap();
+			return null;
 		} catch (error) {
 			const { status } = error as { status: number };
-			setLoginError(status === 401 ? baseTexts.invalidCredentials : baseTexts.serverError);
+			return status === 401 ? baseTexts.invalidCredentials : baseTexts.serverError;
 		}
 	};
-
-	const handleKeyDown = (e: KeyboardEvent) => {
-		if (e.key === 'Enter' && !isLoggingIn) handleSubmit();
-	};
-
+	
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-			<Paper elevation={3} sx={{ p: 5, width: 420, borderRadius: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-				<Typography variant="h5" mb={3}>
-					{lang.common.appName}
-				</Typography>
-				<TextField
-					label={baseTexts.username}
-					value={username}
-					onChange={(e) => {
-						setLoginError(null);
-						setUsername(e.target.value);
-					}}
-					onKeyDown={handleKeyDown}
-					fullWidth
-					margin="normal"
-					size="small"
-					disabled={isLoggingIn}
-				/>
-				<TextField
-					label={baseTexts.password}
-					type="password"
-					value={password}
-					onChange={(e) => {
-						setLoginError(null);
-						setPassword(e.target.value);
-					}}
-					onKeyDown={handleKeyDown}
-					fullWidth
-					margin="normal"
-					size="small"
-					disabled={isLoggingIn}
-				/>
-				{loginError && (
-					<Alert severity="error" sx={{ mt: 2 }}>
-						{loginError}
-					</Alert>
-				)}
-				<Button
-					variant="contained"
-					size="large"
-					fullWidth
-					onClick={handleSubmit}
-					disabled={isLoggingIn}
-					sx={{ mt: 3, borderRadius: 2 }}
-				>
-					{isLoggingIn ? <CircularProgress size={20} color="inherit"/> : baseTexts.submit}
-				</Button>
+		<Box sx={{
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			minHeight: '100%',
+			background: 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)',
+		}}>
+			<Paper elevation={2} sx={{
+				p: { xs: 4, sm: 5 },
+				width: '100%',
+				maxWidth: 448,
+			}}>
+				<LoginHeader/>
+				<LoginForm onLogin={handleLogin} isLoggingIn={isLoggingIn}/>
+				<LoginDemoCredentials/>
 			</Paper>
 		</Box>
 	);

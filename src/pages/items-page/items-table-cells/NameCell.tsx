@@ -1,8 +1,7 @@
 import { TextField, Box, IconButton, CircularProgress, Typography } from '@mui/material';
 import { useState, useRef } from 'react';
 import type { ChangeEvent, KeyboardEvent } from 'react';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { TaskerIcon } from 'src/icons';
 import { lang } from 'src/lang';
 import { isValidItemName, SAMPLE_ITEM_ID } from 'src/utils';
 import type { CommonCellProps } from './types';
@@ -65,12 +64,12 @@ export const NameCell = ({ row, onFieldChange, onSave, onDelete, savingIds }: Co
 						<>
 							<Box sx={{ opacity: showActions ? 1 : 0, transition: 'opacity 0.15s' }}>
 								<IconButton size="small" color="success" onClick={handleSave}>
-									<CheckCircleOutlineIcon fontSize="small"/>
+									<TaskerIcon icon="checkCircle" size={18}/>
 								</IconButton>
 							</Box>
 							<Box sx={{ opacity: showActions ? 1 : 0, '.MuiTableRow-root:hover &': { opacity: 1 }, transition: 'opacity 0.15s' }}>
 								<IconButton size="small" color="error" onClick={handleDelete}>
-									<DeleteOutlineIcon fontSize="small"/>
+									<TaskerIcon icon="trash" size={18}/>
 								</IconButton>
 							</Box>
 						</>

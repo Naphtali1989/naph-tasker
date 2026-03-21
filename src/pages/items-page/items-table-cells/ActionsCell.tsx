@@ -1,6 +1,5 @@
 import { IconButton, CircularProgress, Box } from '@mui/material';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import { TaskerIcon } from 'src/icons';
 import type { CommonCellProps } from './types';
 
 export const ActionsCell = ({ row, savingIds, onSave, onDelete }: CommonCellProps) => {
@@ -12,10 +11,10 @@ export const ActionsCell = ({ row, savingIds, onSave, onDelete }: CommonCellProp
 	return (
 		<Box sx={{ display: 'flex', gap: 0.5 }}>
 			<IconButton size="small" color="primary" onClick={handleSave}>
-				<SaveOutlinedIcon fontSize="small"/>
+				<TaskerIcon icon="save" size={18}/>
 			</IconButton>
 			<IconButton size="small" color="error" onClick={handleDelete}>
-				<DeleteOutlineIcon fontSize="small"/>
+				<TaskerIcon icon="trash" size={18}/>
 			</IconButton>
 		</Box>
 	);

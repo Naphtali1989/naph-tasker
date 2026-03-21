@@ -1,6 +1,5 @@
 import { Box, Button, TextField, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
+import { TaskerIcon } from 'src/icons';
 import { lang } from 'src/lang';
 
 type Props = {
@@ -18,19 +17,19 @@ export const ItemsViewHeader = ({ searchQuery, onSearchChange, onAddItem, isAddD
 			onChange={(e) => onSearchChange(e.target.value)}
 			size="small"
 			sx={{ width: 320 }}
-			InputProps={{
+			slotProps={{ input: {
 				startAdornment: (
 					<InputAdornment position="start">
-						<SearchIcon fontSize="small" sx={{ color: 'text.secondary' }}/>
+						<TaskerIcon icon="search" size={18} color="currentColor"/>
 					</InputAdornment>
 				),
-			}}
+			} }}
 		/>
 		<Button
 			variant="outlined"
 			onClick={onAddItem}
 			disabled={isAddDisabled}
-			startIcon={<AddIcon/>}
+			startIcon={<TaskerIcon icon="add" size={18}/>}
 			size="small"
 		>
 			{lang.items.addItem}

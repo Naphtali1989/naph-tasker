@@ -14,6 +14,7 @@ export const en = {
 		passwordRequired: 'Password is required.',
 		submit: 'Sign in',
 		invalidCredentials: 'Incorrect username or password',
+		signingIn: 'Signing in...',
 		serverError: 'Something went wrong, please try again',
 		demoCredentials: 'DEMO CREDENTIALS',
 		demoCredentialsValue: 'admin / password123',

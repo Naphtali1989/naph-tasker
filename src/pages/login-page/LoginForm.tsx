@@ -66,12 +66,13 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 	};
 	
 	const handleTogglePassword = () => setShowPassword((prev) => !prev);
+	const labelStyles = { fontSize: '0.875rem', fontWeight: 500, color: '#111827', mb: 1, display: 'block' };
+	const formHelperStyles = { fontSize: '0.75rem', mt: 0.5 };
 	
 	return (
 		<Box component="form" noValidate>
-			{/* Username */}
 			<Box mb={3}>
-				<FormLabel sx={{ fontSize: '0.875rem', fontWeight: 500, color: '#111827', mb: 1, display: 'block' }}>
+				<FormLabel sx={labelStyles}>
 					{baseTexts.username}
 				</FormLabel>
 				<TextField
@@ -86,13 +87,12 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 					sx={fieldErrorSx}
 				/>
 				{usernameError && (
-					<FormHelperText error sx={{ fontSize: '0.75rem', mt: 0.5 }}>{usernameError}</FormHelperText>
+					<FormHelperText error sx={formHelperStyles}>{usernameError}</FormHelperText>
 				)}
 			</Box>
 			
-			{/* Password */}
 			<Box mb={3}>
-				<FormLabel sx={{ fontSize: '0.875rem', fontWeight: 500, color: '#111827', mb: 1, display: 'block' }}>
+				<FormLabel sx={labelStyles}>
 					{baseTexts.password}
 				</FormLabel>
 				<TextField
@@ -112,8 +112,8 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 								<InputAdornment position="end">
 									<IconButton size="small" onClick={handleTogglePassword} edge="end" tabIndex={-1}>
 										{showPassword
-											? <TaskerIcon icon="eyeOff" size={16} color="#9CA3AF"/>
-											: <TaskerIcon icon="eye" size={16} color="#9CA3AF"/>
+											? <TaskerIcon icon="eye" size={16} color="#9CA3AF"/>
+											: <TaskerIcon icon="eyeOff" size={16} color="#9CA3AF"/>
 										}
 									</IconButton>
 								</InputAdornment>
@@ -122,43 +122,31 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 					}}
 				/>
 				{(passwordError || loginError) && (
-					<FormHelperText error sx={{ fontSize: '0.75rem', mt: 0.5 }}>{passwordError ?? loginError}</FormHelperText>
+					<FormHelperText error sx={formHelperStyles}>{passwordError ?? loginError}</FormHelperText>
 				)}
 			</Box>
 			
-			{/* Submit */}
 			<Button
 				variant="contained"
 				fullWidth
 				onClick={handleSubmit}
 				disabled={isLoggingIn}
 				sx={{
-					height: 48,
 					fontSize: '1rem',
-					fontWeight: 500,
-					borderRadius: '8px',
 					background: 'linear-gradient(180deg, #6366F1 0%, #4F46E5 100%)',
 					border: '1px solid #4F46E5',
-					boxShadow: '0 1px 2px rgba(99,102,241,0.2), 0 1px 3px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.1)',
-					'&:hover': {
-						background: 'linear-gradient(180deg, #4F46E5 0%, #433BCE 100%)',
-						boxShadow: '0 4px 12px rgba(99,102,241,0.3), 0 2px 4px rgba(0,0,0,0.1)',
-						transform: 'translateY(-1px)',
-						border: '1px solid #433BCE',
-					},
 					'&:active': {
 						transform: 'translateY(0)',
 						boxShadow: '0 1px 2px rgba(99,102,241,0.2), inset 0 1px 3px rgba(0,0,0,0.1)',
 					},
 					'&.Mui-disabled': {
 						opacity: 0.5,
-						background: 'linear-gradient(180deg, #6366F1 0%, #4F46E5 100%)',
 						color: 'white',
 					},
 				}}
 			>
 				{isLoggingIn
-					? <><CircularProgress size={20} color="inherit" sx={{ mr: 1 }}/> Signing in...</>
+					? <><CircularProgress size={20} color="inherit" sx={{ mr: 1 }}/> {baseTexts.signingIn}</>
 					: baseTexts.submit
 				}
 			</Button>

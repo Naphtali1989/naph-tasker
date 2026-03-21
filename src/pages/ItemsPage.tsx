@@ -43,7 +43,7 @@ function ItemsPage() {
 	}, [ dispatch ]);
 	
 	return (
-		<Box sx={{ p: 3 }}>
+		<Box sx={{ p: 3, maxWidth: 1200, mx: 'auto' }}>
 			<ItemsViewHeader
 				searchQuery={searchQuery}
 				onSearchChange={setSearchQuery}

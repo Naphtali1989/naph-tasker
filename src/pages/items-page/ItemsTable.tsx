@@ -29,6 +29,12 @@ export const ItemsTable = ({ rows, isFetching, savingIds, onFieldChange, onField
 	
 	return (
 		<>
+			{selectedIds.length > 0 && (
+				<ItemsTableFooter
+					selectedIds={selectedIds}
+					onClearSelection={() => setSelectedIds([])}
+				/>
+			)}
 			<TaskerTable
 				columns={columns}
 				rows={rows}
@@ -37,12 +43,6 @@ export const ItemsTable = ({ rows, isFetching, savingIds, onFieldChange, onField
 				onSelectRow={handleSelectRow}
 				onSelectAll={handleSelectAll}
 			/>
-			{selectedIds.length > 0 && (
-				<ItemsTableFooter
-					selectedIds={selectedIds}
-					onClearSelection={() => setSelectedIds([])}
-				/>
-			)}
 		</>
 	);
 };

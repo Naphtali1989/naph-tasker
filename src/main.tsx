@@ -1,14 +1,19 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import { store } from 'src/store';
+import theme from './theme';
 import App from './App';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
 <StrictMode>
 	<Provider store={store}>
-		<App/>
+		<ThemeProvider theme={theme}>
+			<CssBaseline/>
+			<App/>
+		</ThemeProvider>
 	</Provider>
 </StrictMode>,
 );

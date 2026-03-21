@@ -1,11 +1,18 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 import { authSelectors } from 'src/store/selectors/auth.selectors';
+import { AppHeader } from 'src/components/AppHeader';
 import { LoginPage, ItemsPage } from 'src/pages';
 
 function ProtectedRoute() {
 	const isAuthenticated = useAppSelector(authSelectors.isAuthenticated);
-	return isAuthenticated ? <Outlet/> : <Navigate to="/login" replace/>;
+	if (!isAuthenticated) return <Navigate to="/login" replace/>;
+	return (
+		<>
+			<AppHeader/>
+			<Outlet/>
+		</>
+	);
 }
 
 const router = createBrowserRouter(

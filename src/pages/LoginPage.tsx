@@ -13,15 +13,15 @@ function LoginPage() {
 	const navigate = useNavigate();
 	const isAuthenticated = useAppSelector(authSelectors.isAuthenticated);
 	const isLoggingIn = useAppSelector(authSelectors.isLoggingIn);
-	
+
 	const [ username, setUsername ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ loginError, setLoginError ] = useState<string | null>(null);
-	
+
 	useEffect(() => {
 		if (isAuthenticated) navigate('/items');
 	}, [ isAuthenticated, navigate ]);
-	
+
 	const handleSubmit = async () => {
 		if (!username || !password) {
 			setLoginError(baseTexts.emptyFields);
@@ -35,14 +35,14 @@ function LoginPage() {
 			setLoginError(status === 401 ? baseTexts.invalidCredentials : baseTexts.serverError);
 		}
 	};
-	
+
 	const handleKeyDown = (e: KeyboardEvent) => {
 		if (e.key === 'Enter' && !isLoggingIn) handleSubmit();
 	};
-	
+
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-			<Paper sx={{ p: 4, width: 400 }}>
+			<Paper elevation={3} sx={{ p: 5, width: 420, borderRadius: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<Typography variant="h5" mb={3}>
 					{lang.common.appName}
 				</Typography>
@@ -56,6 +56,7 @@ function LoginPage() {
 					onKeyDown={handleKeyDown}
 					fullWidth
 					margin="normal"
+					size="small"
 					disabled={isLoggingIn}
 				/>
 				<TextField
@@ -69,6 +70,7 @@ function LoginPage() {
 					onKeyDown={handleKeyDown}
 					fullWidth
 					margin="normal"
+					size="small"
 					disabled={isLoggingIn}
 				/>
 				{loginError && (
@@ -78,10 +80,11 @@ function LoginPage() {
 				)}
 				<Button
 					variant="contained"
+					size="large"
 					fullWidth
 					onClick={handleSubmit}
 					disabled={isLoggingIn}
-					sx={{ mt: 3 }}
+					sx={{ mt: 3, borderRadius: 2 }}
 				>
 					{isLoggingIn ? <CircularProgress size={20} color="inherit"/> : baseTexts.submit}
 				</Button>

@@ -46,7 +46,7 @@ function TaskerTable<T extends { id: string }>(
 	}
 	
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} elevation={2} sx={{ borderRadius: 2 }}>
 			<Table sx={{ '& td, & th': { borderRight: '1px solid', borderRightColor: 'divider' }, '& td:last-child, & th:last-child': { borderRight: 0 } }}>
 				<TableHead>
 					<TableRow>
@@ -63,6 +63,7 @@ function TaskerTable<T extends { id: string }>(
 							<TableCell
 								key={col.key}
 								width={col.width}
+								sx={{ py: 1.5, color: 'text.secondary', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}
 							>
 								{col.header}
 							</TableCell>
@@ -84,7 +85,7 @@ function TaskerTable<T extends { id: string }>(
 								</TableCell>
 							)}
 							{columns.map((col) => (
-								<TableCell key={col.key}>
+								<TableCell key={col.key} sx={{ py: 1.5 }}>
 									{col.renderCell(row)}
 								</TableCell>
 							))}

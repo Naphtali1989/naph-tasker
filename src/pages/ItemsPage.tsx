@@ -61,6 +61,7 @@ function ItemsPage() {
 				rows={rows}
 				isFetching={isFetching}
 				savingIds={savingIds}
+				hasFilter={!!searchQuery}
 				onFieldChange={handleFieldChange}
 				onFieldSave={handleFieldSave}
 				onSave={handleSave}

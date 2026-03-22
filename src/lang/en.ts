@@ -23,9 +23,11 @@ export const en = {
 		searchPlaceholder: 'Search by name...',
 		searchShortcut: 'Ctrl K',
 		addItem: 'Add Item',
+		itemsCount: (count: number) => `${count} item${count !== 1 ? 's' : ''}`,
+		itemsFound: (count: number) => `${count} item${count !== 1 ? 's' : ''} found`,
 		selectedCount: (count: number) => `${count} selected`,
-		markDone: 'Mark Done',
-		deleteSelected: 'Delete Selected',
+		updateSelected: 'Update',
+		deleteSelected: 'Delete',
 	},
 	infoFooter: {
 		toggle: 'About token refresh',

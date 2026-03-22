@@ -7,9 +7,13 @@ export type Column<T> = {
 	width?: string;
 }
 
-export type TaskerTableProps<T extends { id: string }> = TaskerTableRowProps<T>
-	& TaskerTableHeadProps<T> & {
+export type TaskerTableProps<T extends { id: string }> = {
+	columns: Column<T>[];
+	rows: T[];
 	loading?: boolean;
+	selectedIds: string[];
+	onSelectAll?: () => void;
+	onSelectRow?: (id: string) => void;
 }
 
 export type TaskerTableHeadProps<T> = {

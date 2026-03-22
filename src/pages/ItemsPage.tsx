@@ -6,7 +6,7 @@ import { itemsActions } from 'src/store/actions/items.actions';
 import { itemsSelectors } from 'src/store/selectors/items.selectors';
 import { authSelectors } from 'src/store/selectors/auth.selectors';
 import { useSaveItem } from 'src/hooks/use-save-item';
-import { ItemsViewHeader, ItemsTable } from 'src/pages/items-page';
+import { ItemsViewHeader, ItemsTable, ItemsInfoFooter } from 'src/pages/items-page';
 import { toast } from 'src/providers/toast/toast';
 import { lang } from 'src/lang';
 
@@ -59,6 +59,7 @@ function ItemsPage() {
 				onSave={handleSave}
 				onDelete={handleDelete}
 			/>
+			<ItemsInfoFooter/>
 		</Box>
 	);
 }

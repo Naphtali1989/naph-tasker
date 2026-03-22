@@ -7,6 +7,10 @@ import EyeOff from './svg/eye-off.svg?react';
 import Trash from './svg/trash.svg?react';
 import Save from './svg/save.svg?react';
 import CheckCircle from './svg/check-circle.svg?react';
+import Info from './svg/info.svg?react';
+import ChevronDown from './svg/chevron-down.svg?react';
+import ChevronUp from './svg/chevron-up.svg?react';
+import Close from './svg/close.svg?react';
 
 export const iconsSet = {
 	clipboard: Clipboard,
@@ -18,6 +22,10 @@ export const iconsSet = {
 	trash: Trash,
 	save: Save,
 	checkCircle: CheckCircle,
+	info: Info,
+	chevronDown: ChevronDown,
+	chevronUp: ChevronUp,
+	close: Close,
 } as const;
 
 export type IconName = keyof typeof iconsSet;

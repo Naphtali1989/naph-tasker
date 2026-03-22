@@ -26,6 +26,11 @@ export const en = {
 		markDone: 'Mark Done',
 		deleteSelected: 'Delete Selected',
 	},
+	infoFooter: {
+		toggle: 'About token refresh',
+		title: 'Token Refresh Demo',
+		body: 'Access tokens expire every 30 seconds and refresh automatically. Sessions expire after 5 minutes of inactivity, requiring you to sign in again.',
+	},
 	columns: {
 		name: 'Name',
 		status: 'Status',

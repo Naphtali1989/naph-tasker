@@ -21,6 +21,7 @@ export const en = {
 	},
 	items: {
 		searchPlaceholder: 'Search by name...',
+		searchShortcut: 'Ctrl K',
 		addItem: 'Add Item',
 		selectedCount: (count: number) => `${count} selected`,
 		markDone: 'Mark Done',

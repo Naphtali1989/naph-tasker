@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { TaskerIcon } from 'src/icons';
 import { lang } from 'src/lang';
+import { formLabelStyles, formHelperStyles, gradientButtonStyles } from 'src/utils';
 
 const baseTexts = lang.login;
 
@@ -31,7 +32,7 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 	const [ passwordError, setPasswordError ] = useState<string | null>(null);
 	const [ loginError, setLoginError ] = useState<string | null>(null);
 	const [ showPassword, setShowPassword ] = useState(false);
-	
+
 	const handleSubmit = async () => {
 		let hasError = false;
 		if (!username) {
@@ -43,38 +44,34 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 			hasError = true;
 		}
 		if (hasError) return;
-		
+
 		setLoginError(null);
 		const error = await onLogin(username, password);
 		if (error) setLoginError(error);
 	};
-	
+
 	const handleKeyDown = (e: KeyboardEvent) => {
 		if (e.key === 'Enter' && !isLoggingIn) handleSubmit();
 	};
-	
+
 	const handleUsernameChange = (value: string) => {
 		setUsernameError(null);
 		setLoginError(null);
 		setUsername(value);
 	};
-	
+
 	const handlePasswordChange = (value: string) => {
 		setPasswordError(null);
 		setLoginError(null);
 		setPassword(value);
 	};
-	
+
 	const handleTogglePassword = () => setShowPassword((prev) => !prev);
-	const labelStyles = { fontSize: '0.875rem', fontWeight: 500, color: '#111827', mb: 1, display: 'block' };
-	const formHelperStyles = { fontSize: '0.75rem', mt: 0.5 };
-	
+
 	return (
 		<Box component="form" noValidate>
 			<Box mb={3}>
-				<FormLabel sx={labelStyles}>
-					{baseTexts.username}
-				</FormLabel>
+				<FormLabel sx={formLabelStyles}>{baseTexts.username}</FormLabel>
 				<TextField
 					placeholder={baseTexts.usernamePlaceholder}
 					value={username}
@@ -90,11 +87,9 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 					<FormHelperText error sx={formHelperStyles}>{usernameError}</FormHelperText>
 				)}
 			</Box>
-			
+
 			<Box mb={3}>
-				<FormLabel sx={labelStyles}>
-					{baseTexts.password}
-				</FormLabel>
+				<FormLabel sx={formLabelStyles}>{baseTexts.password}</FormLabel>
 				<TextField
 					placeholder={baseTexts.passwordPlaceholder}
 					type={showPassword ? 'text' : 'password'}
@@ -125,25 +120,13 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 					<FormHelperText error sx={formHelperStyles}>{passwordError ?? loginError}</FormHelperText>
 				)}
 			</Box>
-			
+
 			<Button
 				variant="contained"
 				fullWidth
 				onClick={handleSubmit}
 				disabled={isLoggingIn}
-				sx={{
-					fontSize: '1rem',
-					background: 'linear-gradient(180deg, #6366F1 0%, #4F46E5 100%)',
-					border: '1px solid #4F46E5',
-					'&:active': {
-						transform: 'translateY(0)',
-						boxShadow: '0 1px 2px rgba(99,102,241,0.2), inset 0 1px 3px rgba(0,0,0,0.1)',
-					},
-					'&.Mui-disabled': {
-						opacity: 0.5,
-						color: 'white',
-					},
-				}}
+				sx={{ ...gradientButtonStyles.indigo, fontSize: '1rem', '&.Mui-disabled': { opacity: 0.5, color: 'white' } }}
 			>
 				{isLoggingIn
 					? <><CircularProgress size={20} color="inherit" sx={{ mr: 1 }}/> {baseTexts.signingIn}</>

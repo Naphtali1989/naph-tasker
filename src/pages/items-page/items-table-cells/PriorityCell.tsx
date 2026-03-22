@@ -1,6 +1,6 @@
 import TaskerDropdown from 'src/components/TaskerDropdown';
 import { Priority } from 'src/types';
-import { priorityOptions } from 'src/utils';
+import { priorityOptions, dropdownPillStyles } from 'src/utils';
 import type { CommonCellProps } from './types';
 
 const priorityColorMap: Record<Priority, { bg: string; color: string }> = {
@@ -21,14 +21,10 @@ export const PriorityCell = ({ row, onFieldSave }: CommonCellProps) => {
 			options={priorityOptions}
 			onChange={handleChange}
 			selectSx={{
-				borderRadius: '999px',
+				...dropdownPillStyles,
 				backgroundColor: bg,
 				color: color,
-				fontWeight: 500,
-				fontSize: '0.8rem',
-				'& .MuiOutlinedInput-notchedOutline': { border: 'none' },
 				'& .MuiSelect-icon': { color: color },
-				'& .MuiSelect-select': { py: '4px', px: '12px' },
 			}}
 		/>
 	);

@@ -1,23 +1,16 @@
 import { Box, Typography } from '@mui/material';
 import { TaskerIcon } from 'src/icons';
 import { lang } from 'src/lang';
+import { emptyStateStyles } from 'src/utils';
 
 const baseTexts = lang.items;
 
 export const SearchEmptyState = () => (
-	<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, py: 8 }}>
-		<Box sx={{
-			width: 64,
-			height: 64,
-			borderRadius: '16px',
-			backgroundColor: '#F3F4F6',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		}}>
+	<Box sx={emptyStateStyles.wrapper}>
+		<Box sx={emptyStateStyles.iconBox}>
 			<TaskerIcon icon="package" size={32} color="#9CA3AF"/>
 		</Box>
-		<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5 }}>
+		<Box sx={emptyStateStyles.textBox}>
 			<Typography sx={{ fontSize: '1.125rem', fontWeight: 600, color: '#111827' }}>
 				{baseTexts.noMatchesFound}
 			</Typography>

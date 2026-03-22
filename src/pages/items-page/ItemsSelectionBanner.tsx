@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { useAppDispatch } from 'src/store/hooks';
 import { itemsActions } from 'src/store/actions/items.actions';
 import { Status } from 'src/types';
-import { statusOptions } from 'src/utils/status.helpers';
+import { statusOptions, gradientButtonStyles } from 'src/utils';
 import { TaskerIcon } from 'src/icons';
 import { toast } from 'src/providers/toast/toast';
 import { lang } from 'src/lang';
@@ -23,7 +23,7 @@ export const ItemsSelectionBanner = ({ rowCount, hasFilter, selectedIds, onClear
 	const [ selectedStatus, setSelectedStatus ] = useState<Status>(Status.Done);
 	const [ isUpdating, setIsUpdating ] = useState(false);
 	const [ isDeleting, setIsDeleting ] = useState(false);
-	
+
 	const handleUpdate = async () => {
 		const ids = selectedIds;
 		setIsUpdating(true);
@@ -32,7 +32,7 @@ export const ItemsSelectionBanner = ({ rowCount, hasFilter, selectedIds, onClear
 		setIsUpdating(false);
 		if (!success) toast.error(lang.toasts.updateItemsFailed);
 	};
-	
+
 	const handleDelete = async () => {
 		const ids = selectedIds;
 		setIsDeleting(true);
@@ -42,10 +42,10 @@ export const ItemsSelectionBanner = ({ rowCount, hasFilter, selectedIds, onClear
 		if (success) toast.success(lang.toasts.itemsDeleted(ids.length));
 		else toast.error(lang.toasts.deleteItemsFailed);
 	};
-	
+
 	const isBusy = isUpdating || isDeleting;
 	const hasSelection = selectedIds.length > 0;
-	
+
 	return (
 		<Box
 			role="toolbar"
@@ -76,71 +76,31 @@ export const ItemsSelectionBanner = ({ rowCount, hasFilter, selectedIds, onClear
 						}}>
 							{baseTexts.selectedCount(selectedIds.length)}
 						</Box>
-						
-						<Box sx={{
-							display: 'flex',
-							alignItems: 'center',
-							gap: 0.5,
-							p: 0.5,
-							borderRadius: '8px',
-							backgroundColor: '#F3F4F6',
-						}}>
+
+						<Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, p: 0.5, borderRadius: '8px', backgroundColor: '#F3F4F6' }}>
 							<TaskerDropdown
 								value={selectedStatus}
 								options={statusOptions}
 								onChange={setSelectedStatus}
-								selectSx={{
-									fontWeight: 500,
-									fontSize: '0.8rem',
-									'& .MuiOutlinedInput-notchedOutline': { border: 'none' },
-								}}
+								selectSx={{ fontWeight: 500, fontSize: '0.8rem', '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
 							/>
-							
+
 							<Button
 								size="small"
 								disabled={isBusy}
 								onClick={handleUpdate}
 								startIcon={<TaskerIcon icon={isUpdating ? 'checkCircle' : 'save'} size={14}/>}
-								sx={{
-									fontSize: '0.75rem',
-									color: 'white',
-									px: 1.5,
-									py: '5px',
-									borderRadius: '8px',
-									background: 'linear-gradient(rgb(99, 102, 241), rgb(79, 70, 229))',
-									'&:hover': {
-										background: 'linear-gradient(rgb(79, 70, 229), rgb(67, 56, 202))',
-									},
-									'&.Mui-disabled': {
-										color: 'rgba(255,255,255,0.6)',
-										background: 'linear-gradient(rgb(99, 102, 241), rgb(79, 70, 229))',
-									},
-								}}
+								sx={{ ...gradientButtonStyles.indigo, fontSize: '0.75rem', px: 1.5, py: '5px', borderRadius: '8px' }}
 							>
 								{baseTexts.updateSelected}
 							</Button>
 						</Box>
-						
+
 						<Button
 							disabled={isBusy}
 							onClick={handleDelete}
 							startIcon={<TaskerIcon icon="trash" size={14}/>}
-							sx={{
-								fontSize: '0.75rem',
-								color: 'white',
-								px: 1.5,
-								py: '5px',
-								minHeight: 28,
-								borderRadius: '8px',
-								background: 'linear-gradient(rgb(239, 68, 68), rgb(220, 38, 38))',
-								'&:hover': {
-									background: 'linear-gradient(rgb(220, 38, 38), rgb(185, 28, 28))',
-								},
-								'&.Mui-disabled': {
-									color: 'rgba(255,255,255,0.6)',
-									background: 'linear-gradient(rgb(239, 68, 68), rgb(220, 38, 38))',
-								},
-							}}
+							sx={{ ...gradientButtonStyles.danger, fontSize: '0.75rem', px: 1.5, py: '5px', minHeight: 28, borderRadius: '8px' }}
 						>
 							{baseTexts.deleteSelected}
 						</Button>

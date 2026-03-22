@@ -1,6 +1,6 @@
 import TaskerDropdown from 'src/components/TaskerDropdown';
 import { Status } from 'src/types';
-import { statusOptions } from 'src/utils';
+import { statusOptions, dropdownPillStyles } from 'src/utils';
 import type { CommonCellProps } from './types';
 
 const statusColorMap: Record<Status, { bg: string; color: string; border?: string }> = {
@@ -19,15 +19,11 @@ export const StatusCell = ({ row, onFieldSave }: CommonCellProps) => {
 			options={statusOptions}
 			onChange={handleChange}
 			selectSx={{
-				borderRadius: '999px',
+				...dropdownPillStyles,
 				backgroundColor: bg,
 				color: color,
-				fontWeight: 500,
-				fontSize: '0.8rem',
 				border: border ?? 'none',
-				'& .MuiOutlinedInput-notchedOutline': { border: 'none' },
 				'& .MuiSelect-icon': { color: color },
-				'& .MuiSelect-select': { py: '4px', px: '12px' },
 			}}
 		/>
 	);

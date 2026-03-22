@@ -1,5 +1,6 @@
 import { TableRow, TableCell, Checkbox } from '@mui/material';
 import type { TaskerTableRowProps } from './types';
+import { checkboxStyles } from 'src/utils';
 
 export function TaskerTableRow<T extends { id: string }>(
 	{
@@ -28,11 +29,7 @@ export function TaskerTableRow<T extends { id: string }>(
 					<Checkbox
 						checked={isSelected}
 						onChange={() => onSelectRow(row.id)}
-						sx={{
-							color: '#E5E7EB',
-							'&.Mui-checked': { color: '#6366F1' },
-							'& .MuiSvgIcon-root': { fontSize: 18, borderRadius: '6px' },
-						}}
+						sx={{ ...checkboxStyles, '& .MuiSvgIcon-root': { fontSize: 18, borderRadius: '6px' } }}
 					/>
 				</TableCell>
 			)}

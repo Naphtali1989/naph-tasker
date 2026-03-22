@@ -34,7 +34,7 @@ export function TaskerTableRow<T extends { id: string }>(
 				</TableCell>
 			)}
 			{columns.map((col) => (
-				<TableCell key={col.key} sx={{ py: '18px', px: '16px' }}>
+				<TableCell key={col.key} sx={{ py: '20px', px: '16px' }}>
 					{col.renderCell(row)}
 				</TableCell>
 			))}

@@ -147,7 +147,7 @@ export const LoginForm = ({ onLogin, isLoggingIn }: Props) => {
 			>
 				{isLoggingIn
 					? <><CircularProgress size={20} color="inherit" sx={{ mr: 1 }}/> {baseTexts.signingIn}</>
-					: baseTexts.submit
+					: baseTexts.signIn
 				}
 			</Button>
 		</Box>

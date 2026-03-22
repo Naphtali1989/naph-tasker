@@ -1,7 +1,7 @@
 export const en = {
 	common: {
 		appName: 'Naph Tasker',
-		logout: 'Logout',
+		logout: 'Sign out',
 	},
 	login: {
 		welcome: 'Welcome back',
@@ -12,7 +12,7 @@ export const en = {
 		password: 'Password',
 		passwordPlaceholder: 'Enter your password',
 		passwordRequired: 'Password is required.',
-		submit: 'Sign in',
+		signIn: 'Sign in',
 		invalidCredentials: 'Incorrect username or password',
 		signingIn: 'Signing in...',
 		serverError: 'Something went wrong, please try again',

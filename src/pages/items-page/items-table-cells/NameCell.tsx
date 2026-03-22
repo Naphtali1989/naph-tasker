@@ -6,26 +6,54 @@ import { lang } from 'src/lang';
 import { isValidItemName, SAMPLE_ITEM_ID } from 'src/utils';
 import type { CommonCellProps } from './types';
 
-export const NameCell = ({ row, onFieldChange, onSave, onDelete, savingIds }: CommonCellProps) => {
+export const NameCell = ({ row, onFieldChange, onFieldSave, onSave, onDelete, savingIds }: CommonCellProps) => {
 	const isSampleItem = row.id === SAMPLE_ITEM_ID;
 	const [ isFocused, setIsFocused ] = useState(false);
+	const [ localValue, setLocalValue ] = useState(row.name);
 	const inputRef = useRef<HTMLInputElement>(null);
-
+	
 	const showInput = isFocused || isSampleItem;
 	const showActions = isFocused || isSampleItem;
-
+	
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		onFieldChange?.(row.id, 'name', e.target.value);
+		const value = e.target.value;
+		if (isSampleItem) {
+			onFieldChange?.(row.id, 'name', value);
+		} else {
+			setLocalValue(value);
+		}
 	};
-	const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') onSave?.(row.id);
-	};
+	
 	const handleSave = () => {
-		onSave?.(row.id);
+		if (!isSampleItem) {
+			onFieldSave?.(row.id, 'name', localValue);
+		} else {
+			onSave?.(row.id);
+		}
 		inputRef.current?.blur();
 	};
-	const handleDelete = () => onDelete?.(row.id);
-
+	
+	const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') handleSave();
+		if (e.key === 'Escape') {
+			setLocalValue(row.name);
+			inputRef.current?.blur();
+		}
+	};
+	
+	const handleFocus = () => {
+		setLocalValue(row.name);
+		setIsFocused(true);
+	};
+	
+	const handleBlur = () => {
+		setLocalValue(row.name);
+		setIsFocused(false);
+	};
+	
+	const displayValue = isSampleItem ? row.name : localValue;
+	const isInvalid = !isValidItemName(displayValue);
+	
 	return (
 		<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
 			<Box sx={{ flex: 1, position: 'relative' }}>
@@ -33,20 +61,29 @@ export const NameCell = ({ row, onFieldChange, onSave, onDelete, savingIds }: Co
 					<TextField
 						inputRef={inputRef}
 						autoFocus
-						value={row.name}
+						value={displayValue}
 						onChange={handleChange}
 						onKeyDown={handleKeyDown}
-						onFocus={() => setIsFocused(true)}
-						onBlur={() => setIsFocused(false)}
+						onFocus={handleFocus}
+						onBlur={handleBlur}
 						size="small"
 						fullWidth
 						variant="standard"
-						error={!isValidItemName(row.name)}
+						error={isInvalid}
 						helperText={
-							row.name.length < 2 ? lang.validation.nameTooShort :
-								row.name.length > 60 ? lang.validation.nameTooLong : ''
+							displayValue.length < 2 ? lang.validation.nameTooShort :
+								displayValue.length > 60 ? lang.validation.nameTooLong : ''
 						}
-						slotProps={{ formHelperText: { sx: { position: 'absolute', top: '100%', margin: 0, whiteSpace: 'nowrap' } } }}
+						slotProps={{
+							formHelperText: {
+								sx: {
+									position: 'absolute',
+									top: '100%',
+									margin: 0,
+									whiteSpace: 'nowrap',
+								},
+							},
+						}}
 					/>
 				) : (
 					<Typography
@@ -67,8 +104,12 @@ export const NameCell = ({ row, onFieldChange, onSave, onDelete, savingIds }: Co
 									<TaskerIcon icon="checkCircle" size={18}/>
 								</IconButton>
 							</Box>
-							<Box sx={{ opacity: showActions ? 1 : 0, '.MuiTableRow-root:hover &': { opacity: 1 }, transition: 'opacity 0.15s' }}>
-								<IconButton size="small" color="error" onClick={handleDelete}>
+							<Box sx={{
+								opacity: showActions ? 1 : 0,
+								'.MuiTableRow-root:hover &': { opacity: 1 },
+								transition: 'opacity 0.15s',
+							}}>
+								<IconButton size="small" color="error" onClick={() => onDelete?.(row.id)}>
 									<TaskerIcon icon="trash" size={18}/>
 								</IconButton>
 							</Box>

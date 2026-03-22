@@ -21,6 +21,7 @@ export const buildColumns = (context: ColumnContext): Column<Item>[] => [
 			<NameCell
 				row={row}
 				onFieldChange={context.onFieldChange}
+				onFieldSave={context.onFieldSave}
 				onSave={context.onSave}
 				onDelete={context.onDelete}
 				savingIds={context.savingIds}

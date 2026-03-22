@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import { TaskerTable } from 'src/components/tasker-table';
 import { ItemsSelectionBanner } from './ItemsSelectionBanner';
+import { ItemsEmptyState } from './empty-state';
 import { buildColumns } from './columns';
 import type { Item } from 'src/types';
 
@@ -14,9 +15,10 @@ type Props = {
 	onFieldSave: (id: string, field: keyof Item, value: unknown) => void;
 	onSave: (id: string) => void;
 	onDelete: (id: string) => void;
+	onAddItem: () => void;
 }
 
-export const ItemsTable = ({ rows, isFetching, savingIds, hasFilter, onFieldChange, onFieldSave, onSave, onDelete }: Props) => {
+export const ItemsTable = ({ rows, isFetching, savingIds, hasFilter, onFieldChange, onFieldSave, onSave, onDelete, onAddItem }: Props) => {
 	const [ selectedIds, setSelectedIds ] = useState<string[]>([]);
 
 	const handleSelectRow = (id: string) => {
@@ -44,6 +46,7 @@ export const ItemsTable = ({ rows, isFetching, savingIds, hasFilter, onFieldChan
 				selectedIds={selectedIds}
 				onSelectRow={handleSelectRow}
 				onSelectAll={handleSelectAll}
+				emptyState={<ItemsEmptyState hasActiveSearch={hasFilter} onAddItem={onAddItem}/>}
 			/>
 		</Box>
 	);

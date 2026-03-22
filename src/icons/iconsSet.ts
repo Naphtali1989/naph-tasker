@@ -11,6 +11,7 @@ import Info from './svg/info.svg?react';
 import ChevronDown from './svg/chevron-down.svg?react';
 import ChevronUp from './svg/chevron-up.svg?react';
 import Close from './svg/close.svg?react';
+import Package from './svg/package.svg?react';
 
 export const iconsSet = {
 	clipboard: Clipboard,
@@ -26,6 +27,7 @@ export const iconsSet = {
 	chevronDown: ChevronDown,
 	chevronUp: ChevronUp,
 	close: Close,
+	package: Package,
 } as const;
 
 export type IconName = keyof typeof iconsSet;

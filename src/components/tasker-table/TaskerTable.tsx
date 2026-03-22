@@ -1,4 +1,4 @@
-import { Table, TableBody, TableContainer, CircularProgress, Box, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableRow, CircularProgress, Box, Paper } from '@mui/material';
 import { TaskerTableHead } from './TaskerTableHead';
 import { TaskerTableRow } from './TaskerTableRow';
 import type { TaskerTableProps } from './types';
@@ -11,6 +11,7 @@ export function TaskerTable<T extends { id: string }>(
 		selectedIds = [],
 		onSelectRow,
 		onSelectAll,
+		emptyState,
 	}: TaskerTableProps<T>) {
 	if (loading) {
 		return (
@@ -19,6 +20,8 @@ export function TaskerTable<T extends { id: string }>(
 			</Box>
 		);
 	}
+
+	const colSpan = columns.length + (onSelectRow ? 1 : 0);
 
 	return (
 		<TableContainer
@@ -43,7 +46,13 @@ export function TaskerTable<T extends { id: string }>(
 					onSelectAll={onSelectAll}
 				/>
 				<TableBody>
-					{rows.map((row) => (
+					{rows.length === 0 && emptyState ? (
+						<TableRow>
+							<TableCell colSpan={colSpan} sx={{ border: 0, p: 0 }}>
+								{emptyState}
+							</TableCell>
+						</TableRow>
+					) : rows.map((row) => (
 						<TaskerTableRow
 							key={row.id}
 							row={row}

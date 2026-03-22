@@ -1,7 +1,13 @@
 import { TableRow, TableCell, Checkbox } from '@mui/material';
 import type { TaskerTableRowProps } from './types';
 
-export function TaskerTableRow<T extends { id: string }>({ row, columns, isSelected, onSelectRow }: TaskerTableRowProps<T>) {
+export function TaskerTableRow<T extends { id: string }>(
+	{
+		row,
+		columns,
+		isSelected,
+		onSelectRow,
+	}: TaskerTableRowProps<T>) {
 	return (
 		<TableRow
 			selected={isSelected}
@@ -31,7 +37,7 @@ export function TaskerTableRow<T extends { id: string }>({ row, columns, isSelec
 				</TableCell>
 			)}
 			{columns.map((col) => (
-				<TableCell key={col.key} sx={{ py: '14px', px: '16px' }}>
+				<TableCell key={col.key} sx={{ py: '18px', px: '16px' }}>
 					{col.renderCell(row)}
 				</TableCell>
 			))}

@@ -14,6 +14,7 @@ export type TaskerTableProps<T extends { id: string }> = {
 	selectedIds: string[];
 	onSelectAll?: () => void;
 	onSelectRow?: (id: string) => void;
+	emptyState?: ReactNode;
 }
 
 export type TaskerTableHeadProps<T> = {

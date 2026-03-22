@@ -66,6 +66,7 @@ function ItemsPage() {
 				onFieldSave={handleFieldSave}
 				onSave={handleSave}
 				onDelete={handleDelete}
+				onAddItem={handleAddItem}
 			/>
 			<ItemsInfoFooter/>
 		</Box>

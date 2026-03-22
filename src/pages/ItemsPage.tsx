@@ -25,8 +25,15 @@ function ItemsPage() {
 		[ items, searchQuery ],
 	);
 	
-	const { rows, sampleItem, handleFieldChange, handleSave, handleFieldSave, handleAddItem, handleDelete } = useSaveItem(
-		filteredItems);
+	const {
+		rows,
+		sampleItem,
+		handleFieldChange,
+		handleSave,
+		handleFieldSave,
+		handleAddItem,
+		handleDelete,
+	} = useSaveItem(filteredItems);
 	
 	useEffect(() => {
 		if (!isAuthenticated) navigate('/login');
@@ -43,7 +50,7 @@ function ItemsPage() {
 	}, [ dispatch ]);
 	
 	return (
-		<Box sx={{ p: 3, maxWidth: 1200, mx: 'auto' }}>
+		<Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 3, maxWidth: 1200, mx: 'auto', width: '100%' }}>
 			<ItemsViewHeader
 				searchQuery={searchQuery}
 				onSearchChange={setSearchQuery}

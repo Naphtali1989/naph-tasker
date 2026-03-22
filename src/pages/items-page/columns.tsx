@@ -1,4 +1,4 @@
-import type { Column } from 'src/components/TaskerTable';
+import type { Column } from 'src/components/tasker-table';
 import type { Item } from 'src/types';
 import { lang } from 'src/lang';
 import { NameCell, StatusCell, PriorityCell, UpdatedAtCell } from './items-table-cells';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TaskerTable from 'src/components/TaskerTable';
+import { TaskerTable } from 'src/components/tasker-table';
 import { ItemsTableFooter } from './ItemsTableFooter.tsx';
 import { buildColumns } from './columns';
 import type { Item } from 'src/types';
@@ -29,12 +29,6 @@ export const ItemsTable = ({ rows, isFetching, savingIds, onFieldChange, onField
 	
 	return (
 		<>
-			{selectedIds.length > 0 && (
-				<ItemsTableFooter
-					selectedIds={selectedIds}
-					onClearSelection={() => setSelectedIds([])}
-				/>
-			)}
 			<TaskerTable
 				columns={columns}
 				rows={rows}
@@ -43,6 +37,12 @@ export const ItemsTable = ({ rows, isFetching, savingIds, onFieldChange, onField
 				onSelectRow={handleSelectRow}
 				onSelectAll={handleSelectAll}
 			/>
+			{selectedIds.length > 0 && (
+				<ItemsTableFooter
+					selectedIds={selectedIds}
+					onClearSelection={() => setSelectedIds([])}
+				/>
+			)}
 		</>
 	);
 };

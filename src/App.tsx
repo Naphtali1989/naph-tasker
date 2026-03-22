@@ -5,7 +5,7 @@ import { ToastProvider } from 'src/providers/ToastProvider';
 function App() {
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-			<Box sx={{ flex: 1, overflow: 'auto' }}>
+			<Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'auto' }}>
 				<AppRouter/>
 			</Box>
 			<ToastProvider/>

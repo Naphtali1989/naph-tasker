@@ -26,7 +26,7 @@ export const ItemsInfoFooter = () => {
 	};
 	
 	return (
-		<Box component="aside" sx={{ mt: 4 }}>
+		<Box component="footer" sx={{ mt: 'auto' }}>
 			<Box
 				component="button"
 				onClick={handleToggle}
@@ -45,7 +45,7 @@ export const ItemsInfoFooter = () => {
 			>
 				<TaskerIcon icon="info" size={16}/>
 				<span>{baseTexts.toggle}</span>
-				<TaskerIcon icon={isExpanded ? 'chevronUp' : 'chevronDown'} size={11}/>
+				<TaskerIcon icon={isExpanded ? 'chevronDown' : 'chevronUp'} size={11}/>
 			</Box>
 			
 			{isExpanded && (

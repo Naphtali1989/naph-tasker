@@ -101,7 +101,7 @@ export const NameCell = ({ row, onFieldChange, onFieldSave, onSave, onDelete, sa
 						<>
 							<Box sx={{ opacity: showActions ? 1 : 0, transition: 'opacity 0.15s' }}>
 								<IconButton size="small" color="success" onClick={handleSave}>
-									<TaskerIcon icon="checkCircle" size={18}/>
+									<TaskerIcon icon="check" size={18}/>
 								</IconButton>
 							</Box>
 							<Box sx={{

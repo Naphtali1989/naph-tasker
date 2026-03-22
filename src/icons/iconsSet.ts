@@ -7,6 +7,7 @@ import EyeOff from './svg/eye-off.svg?react';
 import Trash from './svg/trash.svg?react';
 import Save from './svg/save.svg?react';
 import CheckCircle from './svg/check-circle.svg?react';
+import Check from './svg/check.svg?react';
 import Info from './svg/info.svg?react';
 import ChevronDown from './svg/chevron-down.svg?react';
 import ChevronUp from './svg/chevron-up.svg?react';
@@ -23,6 +24,7 @@ export const iconsSet = {
 	trash: Trash,
 	save: Save,
 	checkCircle: CheckCircle,
+	check: Check,
 	info: Info,
 	chevronDown: ChevronDown,
 	chevronUp: ChevronUp,

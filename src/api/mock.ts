@@ -7,8 +7,8 @@ import type {
 	UpdateItemPayload,
 } from 'src/types';
 
-const VALID_USERNAME = 'naph';
-const VALID_PASSWORD = '123';
+const VALID_USERNAME = 'admin';
+const VALID_PASSWORD = 'password123';
 const ACCESS_TOKEN_TTL = 30 * 1000;
 const SESSION_TOKEN_TTL = 5 * 60 * 1000;
 const ITEMS_KEY = 'naph-tasker-items';
